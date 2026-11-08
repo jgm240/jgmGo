@@ -17,8 +17,10 @@ its generator, and a display/keypad test program. It is licensed under the Apach
 
 ## Trademarks and attribution
 - "Android" is a trademark of Google LLC. "Android 8.1 Go" is used only to say which Android version this targets.
-  The droid in the boot animation is an original drawing in the spirit of the Android robot, which Google created and
-  shared under CC BY 3.0 (https://developer.android.com/distribute/marketing-tools/brand-guidelines).
+  The droid in the boot animation is drawn by hand for this project, but it is modelled on the Android robot, so it
+  carries Google's attribution line: "The Android robot is reproduced or modified from work created and shared by Google
+  and used according to terms described in the Creative Commons 3.0 Attribution License."
+  Guidelines: https://developer.android.com/distribute/marketing-tools/brand-guidelines
 - "Nokia" and "8110 4G" are trademarks of their owners and are used only to name the supported phone.
 - "Droid" is a trademark of Lucasfilm Ltd. (licensed to Verizon). This project is not affiliated with any of the
   companies named here.
