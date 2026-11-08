@@ -1,0 +1,27 @@
+# jgmGo key layout for the Nokia 8110 4G keypad (matrix_keypad). Written for this project; the Linux key numbers
+# come from the phone's own input driver. OK is DPAD_CENTER so Android's focus code treats it as "press".
+key 2       1
+key 3       2
+key 4       3
+key 5       4
+key 6       5
+key 7       6
+key 8       7
+key 9       8
+key 10      9
+key 11      0
+
+key 139     SOFT_LEFT
+key 158     SOFT_RIGHT
+
+key 103     DPAD_UP
+key 108     DPAD_DOWN
+key 105     DPAD_LEFT
+key 106     DPAD_RIGHT
+key 352     DPAD_CENTER
+key 231     CALL
+
+key 116     DEL       WAKE
+
+key 522     STAR
+key 523     POUND

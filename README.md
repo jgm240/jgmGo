@@ -14,6 +14,7 @@ What has been shown on a real phone:
 
 What is in this repo:
 - `jgmTweaks/`: keypad-first app to change zram size, swappiness and an optional swap file (system app + root helper + SELinux).
+- `jgmKeys/`: use the whole phone with the keypad: arrow-key navigation, soft keys, a free pointer and a T9 keyboard (no touchscreen needed).
 - `branding/`: the boot animation (`bootanimation-jgmgo.zip`) and the script that draws it.
 - `experiments/fbtest/`: the display and keypad test.
 

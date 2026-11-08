@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">jgmKeys</string>
+    <string name="nav_label">jgmKeys keypad navigation</string>
+    <string name="ime_label">jgmKeys T9 keyboard</string>
+</resources>
