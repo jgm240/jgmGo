@@ -1,4 +1,4 @@
-# jgmDroid boot animation: a droid in the jgmOS colours opens its eyes and raises a Nokia 8110 4G.
+# jgmGo boot animation: a droid in the jgmOS colours opens its eyes and raises a Nokia 8110 4G.
 import math, os, shutil, zipfile
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageChops
 W, H, SS = 240, 320, 4
@@ -92,9 +92,9 @@ def scene(open_=1.0, arm=1.0, screen=1.0, text=1.0, bob=0.0, wig=0.0, rise=0.0, 
         top = Image.new('RGBA', im.size, (0, 0, 0, 0)); top.paste(ph, (int(P(hand[0] - 30)), int(P(hand[1] - 78 + 2))), ph)
         hd = ImageDraw.Draw(top); hd.ellipse((P(hand[0] - 8), P(hand[1] - 8), P(hand[0] + 8), P(hand[1] + 8)), fill=g)   # hand over the phone
         im = Image.alpha_composite(im, top)
-    # wordmark: "jgmDroid" is drawn on - an outline is traced left to right by a glowing pen, then the letters fill in
+    # wordmark: "jgmGo" is drawn on - an outline is traced left to right by a glowing pen, then the letters fill in
     if text > 0.005:
-        f = font(33); l, r = 'jgm', 'Droid'
+        f = font(46); l, r = 'jgm', 'Go'
         md = ImageDraw.Draw(Image.new('L', (4, 4)))
         wl, wr = md.textlength(l, font=f), md.textlength(r, font=f); x0 = (W * SS - wl - wr) / 2; y0 = P(240)
         def layer(fill_a, stroke_a):
@@ -118,7 +118,7 @@ def scene(open_=1.0, arm=1.0, screen=1.0, text=1.0, bob=0.0, wig=0.0, rise=0.0, 
         sub_a = ease(seg(text, 0.75, 1.0))
         if sub_a > 0.01:
             T2 = Image.new('RGBA', im.size, (0, 0, 0, 0)); sd = ImageDraw.Draw(T2); sub = font(9.5, b'Semibold')
-            s_ = 'Android 8.1 Go \u00b7 Nokia 8110 4G'; sw_ = sd.textlength(s_, font=sub)
+            s_ = 'for the Nokia 8110 4G'; sw_ = sd.textlength(s_, font=sub)
             sd.text(((W * SS - sw_) / 2, P(296)), s_, font=sub, fill=(150, 175, 170, int(255 * sub_a)))
             im = Image.alpha_composite(im, T2)
     out = im.convert('RGB').resize((W, H), Image.LANCZOS)
