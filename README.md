@@ -1,6 +1,6 @@
-# jgmDroid
+# a8.1_81104g
 
-An experiment to run **Android 8.1 Go** on the **Nokia 8110 4G** ("banana phone", Snapdragon 205, ~400 MB usable RAM).
+"a8.1_81104g" = Android 8.1 for the Nokia 8110 4G. An experiment to run **Android 8.1 Go** on the **Nokia 8110 4G** ("banana phone", Snapdragon 205, ~400 MB usable RAM).
 
 > Unofficial hobby project. It is not affiliated with, endorsed by or sponsored by Nokia, HMD Global, Qualcomm or Google.
 > "Nokia 8110 4G" and "Android" are used only to say which phone and which Android version this targets.
