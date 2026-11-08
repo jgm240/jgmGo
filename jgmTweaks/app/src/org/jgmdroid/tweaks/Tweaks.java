@@ -6,6 +6,7 @@ public final class Tweaks {
     public static final String PROP_ZRAM = "persist.jgm.zram_mb";            // 0 = zram off
     public static final String PROP_SWAPPINESS = "persist.jgm.swappiness";   // 0..100
     public static final String PROP_SWAPFILE = "persist.jgm.swapfile_mb";    // 0 = no swap file
+    public static final String PROP_SPEAK = "persist.jgm.speak";             // read out the highlighted item (jgmKeys)
     public static final String PROP_SEQ = "persist.jgm.apply_seq";           // bumped to make init run the apply script
 
     /** Allowed choices. The phone has about 400 MB of usable RAM, so zram above 512 MB only costs CPU. */

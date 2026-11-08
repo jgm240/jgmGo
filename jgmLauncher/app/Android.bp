@@ -1,0 +1,11 @@
+android_app {
+    name: "JgmLauncher",
+    srcs: ["src/**/*.java"],
+    resource_dirs: ["res"],
+    static_libs: ["JgmKeysLogic"],
+    certificate: "platform",
+    platform_apis: true,
+    privileged: true,
+    overrides: ["Launcher2", "Launcher3", "Launcher3QuickStep"],
+    optimize: { enabled: false },
+}

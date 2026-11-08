@@ -2,7 +2,7 @@ package org.jgmgo.keys;
 
 /** Pure logic: classic multi-tap typing for a phone keypad (press 2 once = a, twice = b ...). */
 public final class MultiTap {
-    public enum Mode { LOWER, CAP_NEXT, UPPER, NUM }
+    public enum Mode { LOWER, CAP_NEXT, UPPER, NUM, PREDICT }
     public static final long TIMEOUT_MS = 900;
 
     /** Replace the last {@code deleteBefore} characters with {@code insert}. */
@@ -19,15 +19,20 @@ public final class MultiTap {
     private boolean pending = false, pendingUpper = false;
 
     public Mode mode() { return mode; }
+    public static String label(Mode m) {
+        switch (m) { case NUM: return "123"; case UPPER: return "ABC"; case LOWER: return "abc"; case PREDICT: return "T9 predictive"; default: return "Abc"; }
+    }
     public boolean hasPending() { return pending; }
+    public void setMode(Mode m) { mode = m; pending = false; }
 
-    /** The '#' key: cycles Abc -> abc -> ABC -> 123. */
+    /** The '#' key: cycles Abc -> abc -> ABC -> 123 -> predictive -> Abc. */
     public void cycleMode() {
         pending = false;
         switch (mode) {
             case CAP_NEXT: mode = Mode.LOWER; break;
             case LOWER: mode = Mode.UPPER; break;
             case UPPER: mode = Mode.NUM; break;
+            case NUM: mode = Mode.PREDICT; break;
             default: mode = Mode.CAP_NEXT; break;
         }
     }

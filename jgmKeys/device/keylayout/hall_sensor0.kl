@@ -1,0 +1,2 @@
+# Nokia 8110 4G slider, first hall sensor. Sent as F11; which of F11/F12 means "open" is the property persist.jgm.slider_open_key.
+key 249 F11 WAKE

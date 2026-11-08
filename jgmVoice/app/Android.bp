@@ -1,0 +1,17 @@
+cc_library_shared {
+    name: "libjgmvosk",
+    srcs: ["jni/jgmvosk.cpp"],
+    shared_libs: ["libdl", "liblog"],
+    sdk_version: "",
+}
+
+android_app {
+    name: "JgmVoice",
+    srcs: ["src/**/*.java"],
+    resource_dirs: ["res"],
+    jni_libs: ["libjgmvosk"],
+    certificate: "platform",
+    platform_apis: true,
+    privileged: true,
+    optimize: { enabled: false },
+}

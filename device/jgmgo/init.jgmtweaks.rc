@@ -1,0 +1,14 @@
+# jgmTweaks: apply the saved swap settings at boot and whenever the app asks (it changes persist.jgm.apply_seq).
+service jgm_apply /system/bin/sh /system/bin/jgmtweaks-apply.sh
+    class main
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:jgm_apply:s0
+
+on property:sys.boot_completed=1
+    start jgm_apply
+
+on property:persist.jgm.apply_seq=*
+    start jgm_apply

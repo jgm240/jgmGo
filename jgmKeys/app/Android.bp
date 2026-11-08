@@ -1,3 +1,14 @@
+// The pure-Java parts (no Android classes), shared with the launcher.
+java_library {
+    name: "JgmKeysLogic",
+    srcs: [
+        "src/org/jgmgo/keys/NavModel.java",
+        "src/org/jgmgo/keys/TypeAhead.java",
+        "src/org/jgmgo/keys/KeyMap.java",
+    ],
+    sdk_version: "current",
+}
+
 android_app {
     name: "JgmKeys",
     srcs: ["src/**/*.java"],

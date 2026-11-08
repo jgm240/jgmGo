@@ -13,10 +13,15 @@ What has been shown on a real phone:
 - a bare kernel + a tiny init drives the 240x320 screen through the plain framebuffer and reads the keypad (`experiments/fbtest`).
 
 What is in this repo:
-- `jgmTweaks/`: keypad-first app to change zram size, swappiness and an optional swap file (system app + root helper + SELinux).
-- `jgmKeys/`: use the whole phone with the keypad: arrow-key navigation, soft keys, a free pointer and a T9 keyboard (no touchscreen needed).
+- `jgmKeys/`: use the whole phone with the keypad. Arrow-key navigation, soft keys with a label bar, number hints (long-press #), a free pointer that snaps to buttons (long-press *), type-ahead in lists, spoken navigation, slider handling and a T9 keyboard (# cycles Abc / abc / ABC / 123 / predictive).
+- `jgmLauncher/`: a home screen where the number keys are the launcher (2-9 apps, 1 voicemail, 0 all apps, hold 0 flashlight).
+- `jgmVoice/`: offline voice assistant (hold the Call key): call, text, open apps, time, timers, alarms, flashlight, Wi-Fi, Bluetooth, volume.
+- `jgmTweaks/`: keypad-first app to change zram size, swappiness and an optional swap file.
+- `device/jgmgo/`: product makefile, key layouts, init script and SELinux file; `tools/stage-device.sh` copies everything into an AOSP tree.
 - `branding/`: the boot animation (`bootanimation-jgmgo.zip`) and the script that draws it.
 - `experiments/fbtest/`: the display and keypad test.
+
+**Tested so far:** the logic of every app (navigation, typing, hints, pointer, voice commands, launcher shortcuts) passes automated checks, and all the Android code compiles against the Android 8.1 SDK. None of it has run on a phone yet, because there is no jgmGo build yet.
 
 Not here, on purpose: any Nokia/Qualcomm firmware or vendor binaries, or AOSP source. See `NOTICE.md`.
 

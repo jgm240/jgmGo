@@ -3,7 +3,6 @@ package org.jgmdroid.tweaks;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemProperties;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -15,19 +14,21 @@ import java.io.FileReader;
 
 /** Keypad-first settings screen: up/down to pick a row, left/right to change it, OK on "Apply". Needs no touchscreen. */
 public class MainActivity extends Activity {
-    private static final int ROW_ZRAM = 0, ROW_SWAPPINESS = 1, ROW_SWAPFILE = 2, ROW_APPLY = 3, ROWS = 4;
+    private static final int ROW_ZRAM = 0, ROW_SWAPPINESS = 1, ROW_SWAPFILE = 2, ROW_SPEAK = 3, ROW_APPLY = 4, ROWS = 5;
     private final TextView[] rows = new TextView[ROWS];
     private TextView info, status;
     private int selected = 0;
     private int zram, swappiness, swapfile;
+    private boolean speak;
     private final Handler handler = new Handler();
 
     @Override protected void onCreate(Bundle b) {
         super.onCreate(b);
-        zram = Tweaks.snap(SystemProperties.getInt(Tweaks.PROP_ZRAM, Tweaks.DEFAULT_ZRAM), Tweaks.ZRAM_MB);
-        swappiness = Tweaks.clampSwappiness(SystemProperties.getInt(Tweaks.PROP_SWAPPINESS, Tweaks.DEFAULT_SWAPPINESS));
-        swapfile = Tweaks.snap(SystemProperties.getInt(Tweaks.PROP_SWAPFILE, Tweaks.DEFAULT_SWAPFILE), Tweaks.SWAPFILE_MB);
+        zram = Tweaks.snap(Props.getInt(Tweaks.PROP_ZRAM, Tweaks.DEFAULT_ZRAM), Tweaks.ZRAM_MB);
+        swappiness = Tweaks.clampSwappiness(Props.getInt(Tweaks.PROP_SWAPPINESS, Tweaks.DEFAULT_SWAPPINESS));
+        swapfile = Tweaks.snap(Props.getInt(Tweaks.PROP_SWAPFILE, Tweaks.DEFAULT_SWAPFILE), Tweaks.SWAPFILE_MB);
 
+        speak = Props.getBool("persist.jgm.speak", false);
         LinearLayout root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
         root.setBackgroundColor(0xFF0C1218);
@@ -87,6 +88,7 @@ public class MainActivity extends Activity {
         rows[ROW_ZRAM].setText("zram:  < " + Tweaks.label(zram) + " >");
         rows[ROW_SWAPPINESS].setText("Swappiness:  < " + swappiness + " >");
         rows[ROW_SWAPFILE].setText("Swap file:  < " + Tweaks.label(swapfile) + " >");
+        rows[ROW_SPEAK].setText("Speak items:  < " + (speak ? "On" : "Off") + " >");
         rows[ROW_APPLY].setText("[ Apply ]");
         for (int i = 0; i < ROWS; i++) rows[i].setBackgroundColor(i == selected ? 0xFF1D3A33 : 0x00000000);
     }
@@ -96,6 +98,7 @@ public class MainActivity extends Activity {
             case ROW_ZRAM: zram = Tweaks.step(Tweaks.ZRAM_MB, zram, dir); break;
             case ROW_SWAPPINESS: swappiness = Tweaks.clampSwappiness(swappiness + dir * Tweaks.SWAPPINESS_STEP); break;
             case ROW_SWAPFILE: swapfile = Tweaks.step(Tweaks.SWAPFILE_MB, swapfile, dir); break;
+            case ROW_SPEAK: speak = !speak; Props.set(Tweaks.PROP_SPEAK, speak ? "true" : "false"); break;          // takes effect at once
             default: break;
         }
         refresh();
@@ -103,14 +106,14 @@ public class MainActivity extends Activity {
 
     private void apply() {
         // The values live in persistent properties; bumping the sequence number makes init run the root script.
-        SystemProperties.set(Tweaks.PROP_ZRAM, String.valueOf(zram));
-        SystemProperties.set(Tweaks.PROP_SWAPPINESS, String.valueOf(swappiness));
-        SystemProperties.set(Tweaks.PROP_SWAPFILE, String.valueOf(swapfile));
-        SystemProperties.set(Tweaks.PROP_SEQ, String.valueOf(System.currentTimeMillis() / 1000));
+        Props.set(Tweaks.PROP_ZRAM, String.valueOf(zram));
+        Props.set(Tweaks.PROP_SWAPPINESS, String.valueOf(swappiness));
+        Props.set(Tweaks.PROP_SWAPFILE, String.valueOf(swapfile));
+        Props.set(Tweaks.PROP_SEQ, String.valueOf(System.currentTimeMillis() / 1000));
         status.setText("Applying...");
         handler.postDelayed(new Runnable() {
             @Override public void run() {
-                String r = SystemProperties.get("sys.jgm.apply_result", "");
+                String r = Props.get("sys.jgm.apply_result", "");
                 status.setText(r.isEmpty() ? "Sent. It can take a few seconds." : r);
             }
         }, 3500);

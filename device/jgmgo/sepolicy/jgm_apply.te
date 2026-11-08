@@ -1,0 +1,15 @@
+# SELinux: the root script that resizes zram and the swap file
+type jgm_apply, domain;
+type jgm_apply_exec, exec_type, file_type;
+init_daemon_domain(jgm_apply)
+allow jgm_apply sysfs_zram:file rw_file_perms;
+allow jgm_apply proc_sysrq:file rw_file_perms;
+allow jgm_apply proc:file rw_file_perms;
+allow jgm_apply block_device:dir search;
+allow jgm_apply swap_block_device:blk_file rw_file_perms;
+allow jgm_apply self:capability { sys_admin dac_override };
+allow jgm_apply system_file:file { rx_file_perms };
+allow jgm_apply toolbox_exec:file rx_file_perms;
+allow jgm_apply shell_exec:file rx_file_perms;
+allow jgm_apply system_data_file:file create_file_perms;
+set_prop(jgm_apply, system_prop)
