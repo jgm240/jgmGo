@@ -1,0 +1,5 @@
+*.img
+*.log
+*.bin
+.DS_Store
+backup/

@@ -1,0 +1,10 @@
+android_app {
+    name: "JgmTweaks",
+    srcs: ["src/**/*.java"],
+    resource_dirs: ["res"],
+    certificate: "platform",     // signed with the platform key: may set system properties
+    platform_apis: true,         // uses android.os.SystemProperties
+    privileged: true,
+    optimize: { enabled: false },
+    product_specific: false,
+}
